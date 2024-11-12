@@ -6,7 +6,7 @@ from ts2g2 import Timeseries, TimeseriesPreprocessing, TimeseriesPreprocessingSe
 import uuid
 from ts2g2 import BuildTimeseriesToGraphNaturalVisibilityStrategy, BuildTimeseriesToGraphHorizontalVisibilityStrategy, BuildTimeseriesToGraphOrdinalPartition, BuildTimeseriesToGraphQuantile
 from ts2g2 import StrategyLinkingGraphByValueWithinRange, LinkNodesWithinGraph
-#from ts2g2 import get_random_walks_from_graph_df
+from ts2g2 import get_random_walks_from_graph_df
 # from ts2vec import TS2Vec
 #from src.ts2vec.ts2vec import TS2Vec
 import networkx as nx
@@ -126,26 +126,9 @@ def create_quantile_graph(amazon: pd.DataFrame):
 
 
 # Get random walks
-def apply_random_walks_to_graphs(amazon: pd.DataFrame) -> pd.DataFrame:
+def get_random_walks_from_graphs(amazon: pd.DataFrame) -> pd.DataFrame:
 
-    embedding_model = VisitorGraphEmbeddingModelDoc2Vec()
-    
-    # Create a new column to store random walks for each graph
-    random_walks_column = []
-    
-    for idx, row in amazon.iterrows():
-        graph = row['Graph']  # Replace with the actual name of the graph column, if different
-        graph= graph._get_graph()
-        if(len(graph.edges()) > 0):
-            walks = embedding_model.get_random_walks_for_graph(graph)
-            random_walks_column.append(walks)
-        else:
-            random_walks_column.append(np.nan)
-
-    # Add the new random walks column to the DataFrame
-    amazon['Random_Walks'] = random_walks_column
-    amazon_rand_walk = amazon[['UUID', 'Graph']] 
-    amazon_rand_walk = amazon_rand_walk.dropna(subset=['Random_Walks'])
+    amazon_rand_walk = get_random_walks_from_graph_df(amazon)
     
     return amazon_rand_walk
 
