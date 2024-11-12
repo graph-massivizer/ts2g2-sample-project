@@ -6,7 +6,7 @@ from .nodes import (
     create_visibility_graph,
     create_ordinal_partition_graph,
     create_quantile_graph,
-    apply_random_walks_to_graphs,
+    get_random_walks_from_graphs,
     train_graph_embedding_model
 
 )
@@ -45,17 +45,17 @@ def create_pipeline(**kwargs) -> Pipeline:
                 outputs="amazon_data_with_quantile_graph",
                 name="create_quantile_graph_node",
             ),
-            node(func=apply_random_walks_to_graphs, 
+            node(func=get_random_walks_from_graphs, 
                 inputs="amazon_data_with_visibility_graph", 
                 outputs="amazon_data_with_rand_walks_visibility", 
                 name="apply_random_walks_visibility_graph_node"
             ),
-            node(func=apply_random_walks_to_graphs, 
+            node(func=get_random_walks_from_graphs, 
                 inputs="amazon_data_with_ordinal_partition_graph", 
                 outputs="amazon_data_with_rand_walks_ordinal_partition", 
                 name="apply_random_walks_ordinal_partition_graph_node"
             ),
-            node(func=apply_random_walks_to_graphs, 
+            node(func=get_random_walks_from_graphs, 
                 inputs="amazon_data_with_quantile_graph", 
                 outputs="amazon_data_with_rand_walks_quantile", 
                 name="apply_random_walks_quantile_graph_node"
