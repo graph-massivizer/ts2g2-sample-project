@@ -1,15 +1,13 @@
 from typing import Dict, Tuple
 
 import pandas as pd
-from ts2g2 import Timeseries, TimeseriesPreprocessing, TimeseriesPreprocessingSegmentation, TimeseriesPreprocessingSlidingWindow, TimeseriesPreprocessingComposite, TimeseriesView, TimeGraph, ToSequenceVisitorSlidingWindow, ToSequenceVisitor, ToSequenceVisitorOrdinalPartition
+from ts2g2 import Timeseries, TimeseriesPreprocessing
 
 import uuid
-from ts2g2 import BuildTimeseriesToGraphNaturalVisibilityStrategy, BuildTimeseriesToGraphHorizontalVisibilityStrategy, BuildTimeseriesToGraphOrdinalPartition, BuildTimeseriesToGraphQuantile
+from ts2g2 import BuildTimeseriesToGraphNaturalVisibilityStrategy, BuildTimeseriesToGraphOrdinalPartition, BuildTimeseriesToGraphQuantile
 from ts2g2 import StrategyLinkingGraphByValueWithinRange, LinkNodesWithinGraph
 from ts2g2 import get_random_walks_from_graph_df
 from ts2g2 import train_graph_embedding_model_df
-# from ts2vec import TS2Vec
-#from src.ts2vec.ts2vec import TS2Vec
 import networkx as nx
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 import numpy as np
