@@ -7,6 +7,7 @@ import uuid
 from ts2g2 import BuildTimeseriesToGraphNaturalVisibilityStrategy, BuildTimeseriesToGraphHorizontalVisibilityStrategy, BuildTimeseriesToGraphOrdinalPartition, BuildTimeseriesToGraphQuantile
 from ts2g2 import StrategyLinkingGraphByValueWithinRange, LinkNodesWithinGraph
 from ts2g2 import get_random_walks_from_graph_df
+from ts2g2 import train_graph_embedding_model_df
 # from ts2vec import TS2Vec
 #from src.ts2vec.ts2vec import TS2Vec
 import networkx as nx
@@ -152,22 +153,8 @@ def train_graph_embedding_model(amazon_rand_walk: pd.DataFrame, embedding_size: 
         pd.DataFrame: DataFrame with an additional column 'Doc2Vec_Model' containing the
                       trained Doc2Vec models for each row.
     """
+    amazon_model = train_graph_embedding_model_df(amazon_rand_walk, embedding_size)
 
-    amazon_rand_walk['Doc2Vec_Model'] = None  # Initialize a new column
-
-    for idx, row in amazon_rand_walk.iterrows():
-            walks = [row['Random_Walks']]
-            documents_gensim = []
-            for i, doc_walks in enumerate(walks):
-                    for doc_walk in doc_walks:
-                            documents_gensim.append(TaggedDocument(doc_walk, [i]))
-            
-            model = Doc2Vec(documents_gensim, vector_size=embedding_size, window=3, min_count=1, workers=4)
-            model.train(documents_gensim, total_examples=model.corpus_count, epochs=model.epochs)
-
-            amazon_rand_walk.at[idx, 'Doc2Vec_Model'] = model
-    
-    amazon_model = amazon_rand_walk
             
     return amazon_model
 
