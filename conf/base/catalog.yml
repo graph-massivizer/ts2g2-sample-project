@@ -1,0 +1,63 @@
+amazon:
+  filepath: data/01_raw/AMZN.csv
+  type: pandas.CSVDataset
+
+# Intermediate datasets: Adding UUID, creating vectors, and adding different graphs
+
+# Data with UUID column added
+amazon_data_with_uuid:
+  type: pandas.CSVDataset  # Data stored as a pandas DataFrame
+  filepath:  data/02_intermediate/amazon_data_with_uuid.csv 
+
+# Data with vectors created (intermediate transformation result)
+amazon_data_with_vectors:
+  type: pandas.CSVDataset  # Data stored as a pandas DataFrame
+  filepath:  data/02_intermediate/amazon_data_with_vectors.csv 
+
+# Data with visibility graph
+amazon_data_with_visibility_graph:
+  type: pandas.CSVDataset  # Data stored as a pandas DataFrame
+  filepath:  data/02_intermediate/amazon_data_with_visibility_graph.csv 
+
+# Data with ordinal partition graph
+amazon_data_with_ordinal_partition_graph:
+  type: pandas.CSVDataset  # Data stored as a pandas DataFrame
+  filepath:  data/02_intermediate/amazon_data_with_ordinal_partition_graph.csv 
+
+# Data with quantile graph
+amazon_data_with_quantile_graph:
+  type: pandas.CSVDataset  # Data stored as a pandas DataFrame
+  filepath:  data/02_intermediate/amazon_data_with_quantile_graph.csv 
+# Datasets after adding UUID and random walks columns for each graph type
+
+# Data with UUID and random walks for visibility graph
+amazon_data_with_rand_walks_visibility:
+  type: pandas.CSVDataset  # Data stored as a pandas DataFrame
+  filepath:  data/02_intermediate/amazon_data_with_rand_walks_visibility.csv 
+
+# Data with UUID and random walks for ordinal partition graph
+amazon_data_with_rand_walks_ordinal_partition:
+  type: pandas.CSVDataset  # Data stored as a pandas DataFrame
+  filepath:  data/02_intermediate/amazon_data_with_rand_walks_ordinal_partition.csv 
+
+# Data with UUID and random walks for quantile graph
+amazon_data_with_rand_walks_quantile:
+  type: pandas.CSVDataset  # Data stored as a pandas DataFrame
+  filepath:  data/02_intermediate/amazon_data_with_rand_walks_quantile.csv 
+
+# The trained model dataset (containing UUID, random walks, and model)
+visibility_graph_embedding_model:
+  type: pandas.CSVDataset  # Data stored as a pandas DataFrame
+  filepath:  data/02_intermediate/visibility_graph_embedding_model.csv # Final output file path
+
+
+# The trained model dataset (containing UUID, random walks, and model)
+ordinal_partition_graph_embedding_model:
+  type: pandas.CSVDataset  # Data stored as a pandas DataFrame
+  filepath:  data/02_intermediate/ordinal_partition_graph_embedding_model.csv # Final output file path
+
+
+# The trained model dataset (containing UUID, random walks, and model)
+quantile_graph_embedding_model:
+  type: pandas.CSVDataset  # Data stored as a pandas DataFrame
+  filepath:  data/02_intermediate/quantile_graph_embedding_model.csv # Final output file path
